@@ -1,0 +1,103 @@
+<br>
+<div class="text-center">
+  <h3>Welcome to Costa Cafe's Click and Order Kiosk</h3>
+</div>
+<br>
+
+<div class="jumbotron">
+  <div class="row">
+    <div class="col-md-12">
+      <form [formGroup]="orderForm" novalidate>
+
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" class="form-control" [ngClass]="{'input-validation-highlight': isNameValid()}" id="name" placeholder="What's your name?"
+                formControlName="name">
+              <div class="validation-error">
+                <span *ngIf="isNameValid()">*Name is Required</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-12">
+            <div class="row">
+              <div class="col-md-5">
+                <div class="form-group">
+                  <label for="phone">Phone Number</label>
+                  <input class="form-control" [ngClass]="{'input-validation-highlight': orderForm.get('phone').errors?.phoneInvalid}" id="phone"
+                    placeholder="What's your phone number?" formControlName="phone" (focus)="resetEmail()">
+                  <div class="validation-error">
+                    <span *ngIf="orderForm.get('phone').errors?.phoneInvalid">*That does not seem like a valid Australian phone number</span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 text-center or-text-container">
+                <span class="or-text">OR</span>
+              </div>
+              <div class="col-md-5">
+                <div class="form-group">
+                  <label for="email">Email Address</label>
+                  <input type="email" class="form-control" [ngClass]="{'input-validation-highlight': orderForm.get('email').errors?.emailInvalid}"
+                    id="email" placeholder="What's your email id?" formControlName="email" (focus)="resetPhone()">
+                  <div class="validation-error">
+                    <span *ngIf="orderForm.get('email').errors?.emailInvalid">*That does not seem like a valid email id</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="validation-error text-center">
+                  <span *ngIf="phoneAndEmailNotSet && orderForm.get('phone').touched  && orderForm.get('email').touched">*Either Phone Number or Email Id is Required</span>
+                </div>
+              </div>
+            </div>
+            <br>
+          </div>
+
+        </div>
+
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label for="orders-multi-select">What do you wish to order today?</label>
+              <br>
+              <div>
+                <angular2-multiselect [data]="dropdownList" [settings]="dropdownSettings" (onOpen)="onOpen($event)" formControlName="orderList">
+                </angular2-multiselect>
+              </div>
+              <div class="validation-error">
+                <span *ngIf="!orderForm.get('orderList').valid && orderListOpened">*You should select something from our menu to place an order</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <br>
+
+        <div class="row">
+          <div class="col-md-2 offset-md-3">
+            <button (click)="resetOrderForm()" class="btn btn-block btn-info">Reset</button>
+          </div>
+          <div class="col-md-2 offset-md-2">
+            <button (click)="submitOrder()" [disabled]="!orderForm.valid" class="btn btn-block" [ngClass]="(orderForm.valid)?'btn-success':'btn-disabled'">Place Order</button>
+          </div>
+        </div>
+
+      </form>
+    </div>
+  </div>
+
+
+  <!-- <div class="row">
+    <div class="col-md-12">
+      <div class="alert alert-success alert-dismissible fade show">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <strong>Woohoo!</strong> Your order is on it's way.
+      </div>
+    </div>
+  </div> -->
+</div>

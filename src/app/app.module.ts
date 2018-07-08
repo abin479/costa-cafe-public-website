@@ -1,16 +1,24 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown/angular2-multiselect-dropdown';
 
 import { AppComponent } from './app.component';
+import { PlaceOrderComponent } from './components/place-order/place-order.component';
+import { PlaceOrderService } from './services/place-order.service';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    PlaceOrderComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
+    AngularMultiSelectModule
   ],
-  providers: [],
+  providers: [PlaceOrderService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

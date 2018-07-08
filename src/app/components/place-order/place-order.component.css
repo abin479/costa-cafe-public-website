@@ -1,0 +1,23 @@
+.or-text-container {
+  padding: 32px;
+}
+
+.or-text {
+  top: 33%;
+  left: 45%;
+  position: absolute;
+  border: solid black 1px;
+  border-radius: 25px;
+  padding: 5px;
+}
+
+.validation-error {
+  font-size: 12px;
+  color: red;
+  padding-left: 12px;
+  height: 12px;
+}
+
+.input-validation-highlight {
+  border: 1px solid red;
+}
